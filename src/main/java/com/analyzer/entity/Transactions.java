@@ -32,7 +32,7 @@ public class Transactions {
     @JoinColumn(name = "user_id",
                 referencedColumnName = "id")
     @ToString.Exclude
-    private User user;
+    private BotUser botUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id",

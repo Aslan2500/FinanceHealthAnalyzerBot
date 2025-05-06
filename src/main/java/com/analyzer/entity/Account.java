@@ -30,7 +30,7 @@ public class Account {
     @JoinColumn(name = "user_id",
                 referencedColumnName = "id")
     @ToString.Exclude
-    private User user;
+    private BotUser botUser;
 
     @Column(name = "balance")
     private BigDecimal balance;

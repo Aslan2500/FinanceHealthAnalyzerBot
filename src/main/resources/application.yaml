@@ -16,5 +16,5 @@ spring:
 
 telegram:
   bot:
-    name: FinanceHealthAnalyzerBoy
+    name: FinanceHealthAnalyzerBot
     token: ${BOT_TOKEN}

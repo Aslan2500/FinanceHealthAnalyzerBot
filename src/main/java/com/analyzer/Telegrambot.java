@@ -1,5 +1,6 @@
 package com.analyzer;
 
+import com.analyzer.managers.UserManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -13,10 +14,14 @@ public class Telegrambot extends TelegramLongPollingBot {
 
     private final String name;
 
+    private final UserManager userManager;
+
     public Telegrambot(@Value("${telegram.bot.token}") String token,
-                       @Value("${telegram.bot.name}") String name) {
+                       @Value("${telegram.bot.name}") String name,
+                       UserManager userManager) {
         super(token);
         this.name = name;
+        this.userManager = userManager;
     }
 
     private void sendMessage(Long chatId, String messageToSend) {
@@ -41,7 +46,13 @@ public class Telegrambot extends TelegramLongPollingBot {
                 String text = incomeMessage.getText();
 
                 if (text.equals("/start")) {
-                    sendMessage(chatId, "Im working");
+                    SendMessage message = userManager.createUser(incomeMessage);
+
+                    try {
+                        execute(message);
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
 
                 } else {
                     sendMessage(chatId, "Unknown command");

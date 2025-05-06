@@ -30,7 +30,7 @@ public class Metrics {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @ToString.Exclude
-    private User user;
+    private BotUser botUser;
 
     @Column(name = "metric_key", nullable = false)
     private String metricKey;

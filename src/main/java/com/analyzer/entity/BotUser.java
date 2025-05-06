@@ -17,14 +17,14 @@ import java.util.UUID;
 @Table(name = "users")
 @Getter
 @Setter
-public class User {
+public class BotUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "telegram_id")
-    private BigDecimal telegramId;
+    private Long telegramId;
 
     @Column(name = "name")
     private String name;
