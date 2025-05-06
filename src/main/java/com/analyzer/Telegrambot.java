@@ -1,0 +1,64 @@
+package com.analyzer;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+@Component
+public class Telegrambot extends TelegramLongPollingBot {
+
+    private final String name;
+
+    public Telegrambot(@Value("${telegram.bot.token}") String token,
+                       @Value("${telegram.bot.name}") String name) {
+        super(token);
+        this.name = name;
+    }
+
+    private void sendMessage(Long chatId, String messageToSend) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(messageToSend);
+
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onUpdateReceived(Update update) {
+        if (update.hasMessage()) {
+            Message incomeMessage = update.getMessage();
+
+            Long chatId = incomeMessage.getChatId();
+            if (incomeMessage.hasText()) {
+                String text = incomeMessage.getText();
+
+                if (text.equals("/start")) {
+                    sendMessage(chatId, "Im working");
+
+                } else {
+                    sendMessage(chatId, "Unknown command");
+                }
+            } else {
+                sendMessage(chatId, "Incorrect data form");
+            }
+        }
+    }
+
+    @Override
+    public String getBotUsername() {
+        return name;
+    }
+
+    @Override
+    public void onRegister() {
+        super.onRegister();
+    }
+}
