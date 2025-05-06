@@ -1,6 +1,6 @@
-package com.analyzer;
+package com.analyzer.bot;
 
-import com.analyzer.managers.UserManager;
+import com.analyzer.bot.managers.UserManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;

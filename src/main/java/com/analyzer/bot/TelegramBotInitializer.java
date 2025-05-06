@@ -1,4 +1,4 @@
-package com.analyzer;
+package com.analyzer.bot;
 
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

@@ -1,6 +1,6 @@
-package com.analyzer;
+package com.analyzer.bot.repository;
 
-import com.analyzer.entity.BotUser;
+import com.analyzer.bot.entity.BotUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

@@ -1,7 +1,7 @@
-package com.analyzer.managers;
+package com.analyzer.bot.managers;
 
-import com.analyzer.UserRepository;
-import com.analyzer.entity.BotUser;
+import com.analyzer.bot.repository.UserRepository;
+import com.analyzer.bot.entity.BotUser;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
