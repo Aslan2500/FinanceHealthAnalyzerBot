@@ -1,31 +1,29 @@
-package com.analyzer.bot.managers;
+package com.analyzer.bot.commands;
 
-import com.analyzer.bot.repository.UserRepository;
 import com.analyzer.bot.entity.BotUser;
+import com.analyzer.bot.managers.MessageManager;
+import com.analyzer.bot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.time.OffsetDateTime;
 
-/**
- * Менеджер для работы с {@link BotUser}
- */
-@Service
+@Component
 @RequiredArgsConstructor
-public class UserManager {
+public class StartCommand implements Command {
 
     private final UserRepository userRepository;
 
     private final MessageManager messageManager;
 
-    /**
-     * Сохраняем нового пользователя
-     */
-    public SendMessage createUser(Message message) {
+    @Override
+    public SendMessage apply(Update update) {
+        Message message = update.getMessage();
+
         User user = message.getFrom();
 
         BotUser botUser = new BotUser();
